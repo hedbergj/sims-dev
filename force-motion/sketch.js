@@ -47,8 +47,8 @@ translate(random(-1,1),random(-1,1))
 
   if (window.DeviceMotionEvent != undefined) {
   	window.ondevicemotion = function(e) {
-  		accel.y = accel.y + event.acceleration.y * .1;
-      accel.x = accel.x + event.acceleration.x * .1;
+  		accel.y = accel.y + event.acceleration.y * .01;
+      accel.x = accel.x + event.acceleration.x * .01;
     }
   }
 
