@@ -5,7 +5,7 @@ frameRate(30);
 
 
 canvas = createCanvas(windowWidth, windowHeight);
-
+//canvas = createCanvas(600,600);
 pos = createVector(random(0,width),random(0,height))
 vel = createVector(2,0);
 accel = createVector(0,0);
@@ -22,6 +22,7 @@ accelVector = new OldArrow(pos,accel);
 accelVector.color = color(whitish);
 accelVector.width = 4;
 accelVector.showComponents = false;
+
 }
 
 function draw() {
@@ -32,6 +33,7 @@ background(random(15,25));
 whitish = random(170,215);
 translate(random(-1,1),random(-1,1))
 //should we change acceleration?
+
   if(keyIsDown(LEFT_ARROW)){
     accel.x-=.002;
   }
@@ -44,18 +46,12 @@ translate(random(-1,1),random(-1,1))
   if (keyIsDown(DOWN_ARROW)){
     accel.y+=.002;
   }
+  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+    accel.y =rotationX*.01;
+    accel.x =rotationY*.01;  }
 
-  console.log(window.DeviceMotionEvent);
 
-  if (window.DeviceMotionEvent != undefined) {
-    //console.log('hi');
-  	window.ondevicemotion = function(e) {
-  		accel.y = accel.y + event.acceleration.y * .001;
-      accel.x = accel.x + event.acceleration.x * .001;
-    }
-  }
 
-//update the vel vectors
 velVector.origin = ball.position;
 velVector.target = p5.Vector.add(p5.Vector.mult(ball.velocity,20),ball.position);
 if(p5.Vector.mag(ball.velocity)!=0){
@@ -81,6 +77,8 @@ ball.wrapEdges();
 ball.display();
 
 }
+
+
 
 function OldArrow(origin_, target_){
 
@@ -168,10 +166,10 @@ Mass.prototype.update = function(){
   this.position.add(this.velocity);
   this.acceleration.mult(0);
 
-  if (frameCount%5==0){
+  if (frameCount%10==0){
   var v = [this.position.x, this.position.y];
   this.history.push(v);
-    if (this.history.length > 10) {
+    if (this.history.length > 7) {
       this.history.splice(0, 1);
     }
   }
@@ -216,34 +214,8 @@ Mass.prototype.wrapEdges = function() {
     this.position.y = height;
   }
 };
-Mass.prototype.bounceEdges = function(){
-  if(this.position.x < 0+this.size/2){
-    this.velocity.x *= -1;
-    this.position.x = 0+this.size/2;
 
-  }
-  if(this.position.x > width-this.size/2){
-    this.velocity.x *= -1;
-    this.position.x = width-this.size/2;
-  }
 
-  if(this.position.y < 0+this.size/2){
-    this.velocity.y *= -1;
-    this.position.y = 0+this.size/2;
-
-  }
-  if(this.position.y > height-this.size/2){
-    this.velocity.y *= -1;
-    this.position.y = height-this.size/2;
-  }
-};
-Mass.prototype.towardMouse = function(a){
-  var mouse = new Vector(mouseX,mouseY);
-  var dir = Vector.sub(mouse,this.position);
-  dir.normalize();
-  dir.mult(a);
-  this.acceleration = dir;
-};
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
