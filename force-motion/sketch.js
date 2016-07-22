@@ -4,7 +4,7 @@ function setup() {
 frameRate(30);
 
 
-canvas = createCanvas(600,600);
+canvas = createCanvas(windowWidth, windowHeight);
 
 pos = createVector(random(0,width),random(0,height))
 vel = createVector(2,0);
@@ -45,10 +45,13 @@ translate(random(-1,1),random(-1,1))
     accel.y+=.002;
   }
 
+  console.log(window.DeviceMotionEvent);
+
   if (window.DeviceMotionEvent != undefined) {
+    //console.log('hi');
   	window.ondevicemotion = function(e) {
-  		accel.y = event.acceleration.y * .01;
-      accel.x = event.acceleration.x * .01;
+  		accel.y = accel.y + event.acceleration.y * .001;
+      accel.x = accel.x + event.acceleration.x * .001;
     }
   }
 
@@ -241,3 +244,7 @@ Mass.prototype.towardMouse = function(a){
   dir.mult(a);
   this.acceleration = dir;
 };
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
