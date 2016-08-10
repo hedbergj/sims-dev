@@ -9,8 +9,8 @@ function setup(){
 function draw(){
   background(200);
   pointLight(250, 250, 250, 100, 100, 0);
-
-  orbitControl();
+  ambientLight(100);
+  //orbitControl();
 
   rotateY(-.2);
   camera(600,-200,2000);
@@ -19,14 +19,20 @@ function draw(){
   axis();
 
     push();
-    ambientMaterial(200);
+    ambientMaterial('yellow');
     ballz = 1000-frameCount;
     translate(ballx,bally,ballz);
     sphere(20);
     pop();
 
     push();
-    cylinder(10,20);
+    ambientMaterial('red');
+    rotateZ(-PI/2);
+    rotateX(Math.atan2(ballz,ballx));
+    translate(0,-sqrt(Math.pow(ballx,2)+Math.pow(ballz,2))/2+10,0)
+    cylinder(10,sqrt(Math.pow(ballx,2)+Math.pow(ballz,2))/2+10);
+    translate(0,-sqrt(Math.pow(ballx,2)+Math.pow(ballz,2))/2+10,0);
+    cone(30,30);
     pop();
 }
 
