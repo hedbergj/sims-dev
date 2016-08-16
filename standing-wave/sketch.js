@@ -4,7 +4,6 @@ var amplitude = 75.0; // Height of wave
 var wavelength = 30;   // How many pixels before the wave repeats
 var dx;               // Value for incrementing x
 var yvalues;  // Using an array to store height values for the wave
-//var k = 1;
 var k = 2*Math.PI/wavelength;
 var omega = 1;
 
@@ -32,7 +31,7 @@ function draw() {
   renderWave(color(0,0,250),1);
 
   calcSum(1);
-  renderWave(color(0,0,0),2);
+  renderWave(color('orange'),2);
 
 
 
