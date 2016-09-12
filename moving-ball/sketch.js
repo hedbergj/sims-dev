@@ -8,7 +8,7 @@ function setup() {
   accel = 0;
   //make the ball! It is an instance of the mover object
   ball = new Mover(pos,vel,accel,10,'red');
-  ball.outline = color('rgba(0, 0, 0, 0)');
+  ball.outline = color('rgba(255, 0, 0, 1)');
 }
 
 
@@ -18,7 +18,7 @@ function draw() {
   //update the position
   //ball.color = color('rgba(30, 200, 255, 1)');
   ball.color = ball.position.y * 255/height;
-  ball.applyForce(createVector(0,2));
+  ball.applyForce(createVector(0,5));
   ball.update();
   //make the ball bounce
   ball.bounceEdges();
