@@ -1,7 +1,12 @@
 
+function preload() {
+  accelLabel = loadImage("a.svg");
+  velLabel = loadImage("v.svg");
+}
+
 function setup() {
 
-  canvas = createCanvas(500, 500);
+  canvas =   createCanvas(windowWidth, windowHeight);
   canvas.parent('sketch-holder');
 
 
@@ -10,11 +15,13 @@ function setup() {
   acceleration = createVector(0,0);
   basePosition = createVector(width/2,height/2);
 
-  ball = new Mover(basePosition,velocity,acceleration,10,'white');
+  ball = new KineticMass(basePosition,velocity,acceleration,10,'rgb(255,165,0)');
   ball.tail = true;
   ball.outline = 'black';
   ball.tailFill = ball.color;
-  ball.tailStroke = 'rgba(0,0,0,0)';
+  ball.tailStroke = ball.color;
+  ball.tailLength = 40;
+  ball.tailSpacing = 10;
 
 
   center = createVector(width/2,height/2)
@@ -36,7 +43,7 @@ function setup() {
 }
 
 function draw() {
-  background(200);
+  background(225);
   ball.wrapEdges();
   ball.giveItAnAcceleration(createVector(sin(frameCount/100)*cos(frameCount/80)*.005,-cos(frameCount/200)*.005));
 
@@ -47,13 +54,20 @@ function draw() {
   velVec.update();
   velVec.display();
   pop();
+  image(velLabel,velVec.target.x,velVec.target.y);
   push();
   accelVec.origin = ball.position;
   accelVec.target = p5.Vector.add(ball.position,p5.Vector.mult(ball.acceleration,10000));
   accelVec.update();
   accelVec.display();
   pop();
+  image(accelLabel,accelVec.target.x,accelVec.target.y);
 
   ball.update();
   ball.display();
+
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
 }

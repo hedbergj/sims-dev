@@ -3,7 +3,7 @@
 
 
 <head>
-  <title>Tests</title>
+  <title>A ball moving in 2d</title>
   <style>
   body {
     font-family:Helvetica, Arial, Sans-serif;
@@ -16,14 +16,6 @@
   </style>
   <!-- load the p5 libraries we need. At first, we'll try from a CDN, but if for some reason that doesn't work, then we can load it from our local copy. For most sketches, all we'll need is the p5 and p5.dom libs -->
 
-
-  <script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
-});
-</script>
-<script type="text/javascript" async   src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
   <!-- get p5.js from cdn -->
   <script language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.2/p5.min.js"></script>
   <!-- uh oh. Can't find CDN?, then load from local. -->
@@ -35,9 +27,9 @@ MathJax.Hub.Config({
   <script language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.2/addons/p5.dom.min.js"></script>
 
   <!-- let's get our sketch! -->
+  <script language="javascript" src="../../science-library/lib/science.js"></script>
 
-
-  <script language="javascript" src="equations.js"></script>
+  <script language="javascript" src="sketch.js"></script>
 
   <!-- this line removes any default padding and style. you might only need one of these values set. -->
   <style> body {padding: 0; margin: 0;} </style>
@@ -46,9 +38,6 @@ MathJax.Hub.Config({
 </head>
 
 <body>
-  <p>
-    Some words: $\alpha$
-  </p>
 <div id="sketch-holder" style="position: relative;">
   <!-- Our sketch will go here! -->
 </div>

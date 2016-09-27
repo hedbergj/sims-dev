@@ -1,0 +1,22 @@
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="31.0005px" height="25px" viewBox="0 0 31.0005 25" enable-background="new 0 0 31.0005 25" xml:space="preserve">
+<g>
+	<defs>
+		<rect id="SVGID_1_" width="31.0005" height="25"/>
+	</defs>
+	<clipPath id="SVGID_2_">
+		<use xlink:href="#SVGID_1_"  overflow="visible"/>
+	</clipPath>
+	<path clip-path="url(#SVGID_2_)" d="M8.4678,21.7783l-4.1807-9.2666c-0.1865-0.373-0.293-0.373-0.3726-0.373
+		c-0.0269,0-0.1333,0-0.3994,0.1865l-2.2637,1.7041c-0.3193,0.2393-0.3193,0.3193-0.3193,0.3994
+		c0,0.1064,0.0796,0.2393,0.2397,0.2393c0.1597,0,0.5591-0.3193,0.8252-0.5059c0.1333-0.1328,0.5059-0.3994,0.7456-0.585
+		l4.7129,10.3311c0.1602,0.373,0.2666,0.373,0.5063,0.373c0.3462,0,0.4258-0.1338,0.5854-0.4795L19.3579,1.4082
+		c0.1865-0.3467,0.1865-0.4268,0.1865-0.4795c0-0.2402-0.1865-0.4795-0.4795-0.4795c-0.1855,0-0.373,0.1064-0.5586,0.5059
+		L8.4678,21.7783"/>
+
+		<line clip-path="url(#SVGID_2_)" fill="none" stroke="#000000" stroke-width="0.9552" stroke-miterlimit="10" x1="19.0923" y1="0.9551" x2="30.5415" y2="0.9551"/>
+	<g clip-path="url(#SVGID_2_)">
+		<text transform="matrix(1 0 0 1 19.4253 23.0576)" font-family="'Times-Italic'" font-size="23.3813">r</text>
+	</g>
+</g>
+</svg>
