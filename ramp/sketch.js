@@ -35,10 +35,6 @@ function draw() {
   checkIn();
   ball.applyForce(netForce);
   ball.update();
-  //console.log(thetaRadians);
-  //make the ball bounce
-  //ball.wrapEdges();
-  //display changes
   ball.display();
   }
 function calcNetForce(){
@@ -51,7 +47,7 @@ function calcNetForce(){
 
 }
 function checkIn(){
-  if (ball.position.x>width/2){
+  if (ball.position.x> width/2){
     ball.position.x= -width
   }
 }
