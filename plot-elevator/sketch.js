@@ -1,30 +1,32 @@
 var xarray = [];
 var yarray = [];
-ground = 500;
+ground = 451;
 var goUpButton;
 
 var img;
 function preload() {
-  img = loadImage("person-elevator.svg");
+  elevatorCab = loadImage("elevator-cab.svg");
+  building = loadImage("building-outline.svg");
+
 }
 
 function setup() {
   running = true;
-  canvas = createCanvas(500,1000);
+  canvas = createCanvas(600,1000);
   frameRate(20);
   onoff = createButton("Pause");
-  onoff.position(width-200,50);
-  onoff.class("sim-button blue");
+  onoff.position(width-100,50);
+  onoff.class("sim-button blue slim");
   onoff.mousePressed(turnonoff);
   goUpButton = createButton("GO UP");
-  goUpButton.position(width-100,30);
-  goUpButton.class("sim-button blue");
+  goUpButton.position(width-100,20);
+  goUpButton.class("sim-button blue slim");
 
   goDownButton = createButton("GO DOWN");
   goDownButton.position(width-100,80);
-  goDownButton.class("sim-button blue");
+  goDownButton.class("sim-button blue slim");
 
-  pos = createVector(width-50,ground)
+  pos = createVector(width-150,ground)
   vel = createVector(0,0);
   accel = createVector(0,0);
   //make the ball! It is an instance of the mover object
@@ -41,9 +43,9 @@ function setup() {
   goDownButton.mousePressed(goDown);
 
 
-  positionGraph = new Graph(250,250,0,5,0,300,8);
+  positionGraph = new Graph(250,250,0,5,-350,350,8);
 	positionGraph.showBorder = false;
-	positionGraph.set_offset(20,30);
+	positionGraph.set_offset(20,00);
 
   positionPlot = new Plot([],0,0,200,1);
   positionPlot.pointSize = 1;
@@ -85,10 +87,7 @@ function draw() {
   //console.log(ball.velocity.y)
   background(255);
 
-  push()
-  stroke(0);
-  line(0,ground,width,ground);
-  pop();
+
 
   motion1.advanceInTime();
 
@@ -109,7 +108,8 @@ function draw() {
   //now during the draw function call these three functions
 	accelGraph.plots[0].tpRecord(-ball.acceleration.y,accelGraph);
 
-  image(img, ball.position.x-50, ball.position.y-100);
+  image(building, width/2+30, 10);
+  image(elevatorCab, ball.position.x-50, ball.position.y-100);
 
 }
 function goUp(){

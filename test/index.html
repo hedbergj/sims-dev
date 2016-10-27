@@ -1,56 +1,102 @@
 <!DOCTYPE html>
 <html>
-
+<title>Plots</title>
 
 <head>
-  <title>Tests</title>
-  <style>
-  body {
-    font-family:Helvetica, Arial, Sans-serif;
-  }
-  canvas {
+  <link href="../../sim-design/sims-styles.css" rel="stylesheet" />
 
-
-
-  }
-  </style>
   <!-- load the p5 libraries we need. At first, we'll try from a CDN, but if for some reason that doesn't work, then we can load it from our local copy. For most sketches, all we'll need is the p5 and p5.dom libs -->
 
+    <!-- get p5.js from cdn -->
+    <script language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.2/p5.min.js"></script>
+    <!-- uh oh. Can't find CDN?, then load from local. -->
+    <script>
+    window.p5 || document.write('<script src="../../js/p5.min.js"><\/script><script src="../../../js/addons/p5.dom.js"><\/script>');
+    </script>
 
-  <script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
-});
-</script>
-<script type="text/javascript" async   src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-  <!-- get p5.js from cdn -->
-  <script language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.2/p5.min.js"></script>
-  <!-- uh oh. Can't find CDN?, then load from local. -->
-  <script>
-  window.p5 || document.write('<script src="../../../js/p5.js"><\/script><script src="../../../js/addons/p5.dom.min.js"><\/script>');
-  </script>
+    <!-- get p5.dom.js from cdn -->
+    <script language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.2/addons/p5.dom.min.js"></script>
+    <script language="javascript" src="../../science-library/lib/science.js"></script>
+    <!-- <script language="javascript" src="https://ccny-physics-sims.github.io/science-library/lib/science.js"></script> -->
 
-  <!-- get p5.dom.js from cdn -->
-  <script language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.2/addons/p5.dom.min.js"></script>
+    <!-- let's get our sketch! -->
+    <script language="javascript" src="sketch-2.js"></script>
 
-  <!-- let's get our sketch! -->
+    <!-- this line removes any default padding and style. you might only need one of these values set. -->
+    <style> body {padding: 0; margin: 0;} </style>
+    <style>
 
+    //my CSS begins here
 
-  <script language="javascript" src="equations.js"></script>
+.nums {
+  float: right;
+}
 
-  <!-- this line removes any default padding and style. you might only need one of these values set. -->
-  <style> body {padding: 0; margin: 0;} </style>
+input[type="range"]:nth-child(1)::before {
+  content: "mass";
+  position: fixed;
+  margin-top: 1.5em;
+  color: black;
+}
 
+input[type="range"]:nth-child(2)::before {
+  content: "impulse";
+  position: fixed;
+  margin-top: 1.5em;
+  color: black;
+}
 
+input[type="range"]:nth-child(3)::before {
+  position: fixed;
+  margin-top: 1.5em;
+  color: black;
+  content: "angle";
+}
+
+#slider-holder {
+  right: 20px;
+  top: $spacing;
+}
+
+#slider-holder > * {
+  display: block;
+  margin-bottom: 3em;
+}
+
+#button-holder {
+  right: 20px;
+  bottom: 20px;
+}
+
+#button-holder>* {
+  display: block;
+  margin-top: 1.5em;
+}
+
+#stats-holder >* {
+  position: fixed;
+  min-width: 8.5em;
+  left: 20px;
+  bottom: 20px;
+  // border: 1px solid black;
+}
+
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
+</style>
 </head>
 
 <body>
-  <p>
-    Some words: $\alpha$
-  </p>
-<div id="sketch-holder" style="position: relative;">
-  <!-- Our sketch will go here! -->
-</div>
+  <div id="sketch-holder" style="position: relative;">
+    <!-- Our sketch will go here! -->
+    <div id="container" style="position:absolute">
+      <div id="slider-holder" style="position: fixed;"></div>
+      <div id="button-holder" style="position: fixed;"></div>
+      <div id="stats-holder" style="position: fixed;"> </div>
+    </div>
+  </div>
 </body>
 </html>
