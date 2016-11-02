@@ -5,15 +5,15 @@ var ballz = 0;
 var r = {mag: 200, dir: 0};
 function setup(){
   createCanvas(710, 400, WEBGL);
-  phiSlider = createSlider(-90, 90, 1);
+  phiSlider = createSlider(-180, 180, 1);
   phiSlider.parent('sketch-holder');
-  phiSlider.position(20, 60);
+  phiSlider.position(20, 30);
   phiSlider.style('width', '150px');
-  phiSlider.class("sim-slider red");
+  phiSlider.class("sim-slider gray");
 }
 
 function draw(){
-  background(200);
+  background(255);
   pointLight(250, 250, 250, 100, 100, 0);
   ambientLight(100);
   //orbitControl();
@@ -37,12 +37,12 @@ function draw(){
     pop();
     push();
     translate(0,-r.mag,0);
-    cone(30,30);
+    cone(30,50);
     pop();
     pop();
 
     push();
-    translate(r.mag+15,0,0)
+    translate(0,0,0)
     rotateY((PI/180)*phiSlider.value());
     ambientMaterial('green');
     rotateZ(-PI/2);
@@ -53,10 +53,11 @@ function draw(){
     pop();
     push();
     translate(0,-r.mag,0);
-    cone(30,30);
+    cone(30,50);
     pop();
     pop();
 
+    if(Math.abs(Math.sin((PI/180)*phiSlider.value()))>.001){
     push();
     translate(0,0,0)
     rotateZ(PI/2);
@@ -72,10 +73,12 @@ function draw(){
     if(Math.sin((PI/180)*phiSlider.value())<0){
       rotateX(PI);
     }
-    cone(30,30);
+    cone(30,50);
+    pop();
+    pop();
+    }
 
-    pop();
-    pop();
+
 }
 
 function axis(){
@@ -83,7 +86,7 @@ function axis(){
   rotateX(0);
   rotateY(0);
   rotateZ(0);
-  ambientMaterial('red');
+  ambientMaterial('gray');
   cylinder(3, 500);
   pop();
 
@@ -91,7 +94,7 @@ function axis(){
   rotateX(HALF_PI);
   //rotateY(90);
   //rotateZ(0);
-  ambientMaterial('green');
+  ambientMaterial('gray');
   cylinder(3, 1000);
   pop();
 
@@ -99,7 +102,7 @@ function axis(){
   rotateX(0);
   rotateY(0);
   rotateZ(HALF_PI);
-  ambientMaterial('blue');
+  ambientMaterial('gray');
   cylinder(3, 500);
   pop();
 
