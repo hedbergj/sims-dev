@@ -3,10 +3,10 @@ var forceSlider;
 var triangleHeight, triangleBase;
 
 function setup() {
-  canvas=createCanvas(400 , 400);
+  canvas=createCanvas(400 , 600);
   canvas.parent('sketch-holder');
 
-  angleSlider = createSlider(0, 50, 30, 1);
+  angleSlider = createSlider(0, 90, 0, 1);
   angleSlider.position(20,50);
   angleSlider.parent('sketch-holder');
   angleSlider.class("sim-slider red");
@@ -15,7 +15,7 @@ function setup() {
 
   box_fbd.showLabels = true;
   box_fbd.showResultant = false;
-  triangleBase = 200;
+  triangleBase = 300;
   triangleHeight = 100;
 
 
@@ -24,8 +24,16 @@ function setup() {
 function draw() {
   background(255);
   theta = angleSlider.value()*PI/180;
+  if (theta < 50*PI/180){
   triangleHeight = triangleBase*Math.tan(theta);
+  triangleBase = 300;
+  }
+  else {
+  triangleHeight = 300*Math.tan(50*PI/180);
+  triangleBase = triangleHeight/Math.tan(theta);
+  }
   drawTriangle()
+  drawCoordinates();
 
   push();
   noStroke();
@@ -38,11 +46,36 @@ function draw() {
   box_fbd.direction = [PI/2,(PI/2-theta),-theta+PI]
   box_fbd.xoffsets = [0,0,0]
   box_fbd.yoffsets = [0,0,0]
-  box_fbd.labels = ['gravity','gravity (Y)', 'gravity (X)']
+  if(theta < 0.001){
+  box_fbd.labels = ['weight','','']
+  }
+  else
+  box_fbd.labels = ['weight','y-comp', 'x-comp']
 
   box_fbd.update();
   box_fbd.display();
 
+
+}
+
+function drawCoordinates() {
+  push();
+  textSize(14);
+  translate(80,200);
+  text("x",50*Math.cos(theta),-50*Math.sin(theta)-10);
+  text("y",-50*Math.sin(theta),-50*Math.cos(theta)-10);
+  push();
+  stroke(0);
+
+  rotate(-theta);
+  line(0,0,50,0);
+  line(50,0,40,6);
+  line(50,0,40,-6);
+  line(0,0,0,-50);
+  line(0,-50,6,-40);
+  line(0,-50,-6,-40);
+  pop();
+  pop();
 
 }
 
