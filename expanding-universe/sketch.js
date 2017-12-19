@@ -4,6 +4,7 @@ var offsety = 0;
 var easing = 0.05;
 var dx,dy;
 var img2x,img2y;
+var scale = 1.03;
 function preload() {
   deepfield = loadImage("hubbleDF1.jpg");
   deepfieldalpha = loadImage("hubbleDF1-alpha.png");
@@ -33,7 +34,7 @@ function draw() {
 // offsetx += dx * easing;
 // offsety += dy * easing;
 //tint(255, 127);  // Display at half opacity
-image(deepfieldalpha, .05*(mouseX-centerx), .05*(mouseY-centery),deepfieldalpha.width*1.03,deepfieldalpha.height*1.03);
+image(deepfieldalpha, .05*(mouseX-centerx), .05*(mouseY-centery),deepfieldalpha.width*scale,deepfieldalpha.height*scale);
 
 }
 
