@@ -91,7 +91,6 @@ Orbiter.prototype.drawOrbiter = function(){
       }
   }
 
-
 function mousePressed(){
 
   Orbiters.push(new Orbiter(width/2, height/2 - h, mouseX - width/2, mouseY - (height/2 - h)));

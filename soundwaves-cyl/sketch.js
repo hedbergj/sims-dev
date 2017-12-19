@@ -25,14 +25,14 @@ function setup() {
   for (var i=0; i<10; i++) {
      molecules.push(new Waver(color(230,40,40)));
    }
-  fill(100);
+  fill(240);
 
 
 }
 
 function draw() {
 
-  background(255);
+  background(0);
 
   for (var i=0; i<molecules.length; i++) {
 
