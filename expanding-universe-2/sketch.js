@@ -32,19 +32,28 @@ function setup() {
   expSlider = createSlider(0,7, 0, .1);
   expSlider.position(20,50);
   expSlider.parent('sketch-holder');
-  expSlider.class("sim-slider red");
+  expSlider.class("sim-slider gray");
   expSlider.changed(moveUniverse);
   expSliderLabel = createP();
   expSliderLabel.position(20,10);
   expSliderLabel.parent('sketch-holder');
+  expSliderLabel.style("color", "#ffffff");
+  expSliderLabel.style("font-family", "Helvetica");
+
+  descriptionText = createP();
+  descriptionText.position(20,700)
+  descriptionText.parent('sketch-holder');
+  descriptionText.html('Data from the Hubble Space Telescope')
+  descriptionText.style("color", "#aaaaaa");
+  descriptionText.style("font-family", "Helvetica");
 }
 
 function draw() {
   background(0)
   expScale =   1+.01* expSlider.value();
   push();
-  expSliderLabel.style("color", "#ffffff");
-  expSliderLabel.html('Expansion:'+expScale )
+
+  expSliderLabel.html('Expansion: '+expScale )
   pop();
   translate(centerx,centery);
 
