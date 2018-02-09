@@ -28,7 +28,7 @@ function setup() {
    line(30,0,30,40);
    pop();
    frameRate(25);
-   //noLoop();
+   noLoop();
 }
 
 function draw() {
