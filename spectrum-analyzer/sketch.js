@@ -3,11 +3,12 @@ var ybottompadding = 40;
 var xleftpadding = 40;
 var xlabel;
 var ylabel;
-var running=false;
+var running=true;
 var onoff;
+var spectrum;
 
 function setup() {
-   createCanvas(710,400);
+   canvas = createCanvas(windowWidth-100,400);
      onoff = createButton("start");
      onoff.mouseClicked(turnonoff);
      onoff.position(650,30);
@@ -21,14 +22,15 @@ function setup() {
 
    mic = new p5.AudioIn();
    mic.start();
-   fft = new p5.FFT();
+   mic.amp(.1);
+   fft = new p5.FFT(.5,1024);
    fft.setInput(mic);
    push();
    line(0,height-ybottompadding,width,height-ybottompadding);
    line(30,0,30,40);
    pop();
    frameRate(25);
-   noLoop();
+   //noLoop();
 }
 
 function draw() {
@@ -36,13 +38,13 @@ function draw() {
    background(255);
    line(10,height-ybottompadding,width,height-ybottompadding);
    line(xleftpadding,0,xleftpadding,height-10);
-   var spectrum = fft.analyze();
+   spectrum = fft.analyze();
    fill(20,180,20);
    translate(xleftpadding,0);
    beginShape();
    vertex(0, height-40)
    for (i = 1; i<spectrum.length; i++) {
-    vertex(i, map(spectrum[i], 0, 255, height-ybottompadding, 0) );
+    vertex(i*2, map(spectrum[i], 0, 255, height-ybottompadding, 0) );
    }
    endShape();
 }
