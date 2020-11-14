@@ -138,3 +138,19 @@ function mouseReleased() {
   aswatchYellow.released();
 
 }
+
+function touchStarted() {
+  aswatchRed.pressed();
+  aswatchBlue.pressed();
+  aswatchYellow.pressed();
+  // prevent default
+  return false;
+}
+
+function touchEnded() {
+  aswatchRed.released();
+  aswatchBlue.released();
+  aswatchYellow.released();
+  // prevent default
+  return false;
+}
