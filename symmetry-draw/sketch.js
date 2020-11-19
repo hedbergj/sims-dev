@@ -9,7 +9,7 @@ let theme = [[70,12,140,'#46788C'],[242, 184, 75,'#F2B84B'],[217, 173, 119,'#D9A
 let alphas = ['ff','dd','cc','44','22']
 
 let mean = 0
-let sd = .5
+let sd = .7
 function setup() {
   canvas = createCanvas(windowWidth, windowHeight*.9);
   canvas.parent('sketch-holder')
@@ -187,7 +187,7 @@ function draw() {
           push();
           scale(-1, 1);
           circle(mx+randomGaussian(mean, sd),my+randomGaussian(mean, sd),random(1,3))
-          //circle(mx+randomGaussian(mean, sd),my+randomGaussian(mean, sd),random(1,3))
+          circle(mx+randomGaussian(mean, sd),my+randomGaussian(mean, sd),random(1,3))
 
           //line(mx, my, pmx, pmy);
           pop();
@@ -195,7 +195,7 @@ function draw() {
 
         }
         else {
-          circle(mx+randomGaussian(mean, sd),my+rrandomGaussian(mean, sd),random(1,3))
+          circle(mx+randomGaussian(mean, sd),my+randomGaussian(mean, sd),random(1,3))
 
         }
       }
