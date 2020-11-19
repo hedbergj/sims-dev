@@ -177,11 +177,15 @@ function draw() {
         let sw = 2;
         strokeWeight(sw);
         circle(mx+randomGaussian(),my+randomGaussian(),random(1,4))
+        circle(mx+randomGaussian(),my+randomGaussian(),random(1,4))
+
         //line(mx, my, pmx, pmy);
         if (mirror){
           push();
           scale(-1, 1);
           circle(mx+randomGaussian(),my+randomGaussian(),random(1,4))
+          circle(mx+randomGaussian(),my+randomGaussian(),random(1,4))
+
           //line(mx, my, pmx, pmy);
           pop();
 
