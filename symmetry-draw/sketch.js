@@ -180,14 +180,14 @@ function draw() {
         let sw = 2;
         strokeWeight(sw);
         circle(mx+randomGaussian(mean, sd),my+randomGaussian(mean, sd),random(1,3))
-        circle(mx+randomGaussian(mean, sd),my+randomGaussian(mean, sd),random(1,3))
+        //circle(mx+randomGaussian(mean, sd),my+randomGaussian(mean, sd),random(1,3))
 
         //line(mx, my, pmx, pmy);
         if (mirror){
           push();
           scale(-1, 1);
           circle(mx+randomGaussian(mean, sd),my+randomGaussian(mean, sd),random(1,3))
-          circle(mx+randomGaussian(mean, sd),my+randomGaussian(mean, sd),random(1,3))
+          //circle(mx+randomGaussian(mean, sd),my+randomGaussian(mean, sd),random(1,3))
 
           //line(mx, my, pmx, pmy);
           pop();
