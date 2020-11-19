@@ -140,7 +140,8 @@ function changeStroke(arg) {
 }
 
 function saveFile() {
-  save('design.jpg');
+  //save('design.jpg');
+  saveCanvas(canvas, 'manadala', 'jpg');
 }
 
 
