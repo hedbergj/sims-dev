@@ -6,7 +6,10 @@ let symmetryCountSlider;
 let strokeColor;
 let mirror = true;
 let theme = [[70,12,140,'#46788C'],[242, 184, 75,'#F2B84B'],[217, 173, 119,'#D9AD77'],[242, 127, 27,'#F27F1B'],[217, 75, 24,'#D94B18'],[0,0,0,'#000000'],[1,1,1,'#ffffff']]
-let alphas = ['ff','dd','cc','66','44']
+let alphas = ['ff','dd','cc','44','22']
+
+let mean = 0
+let sd = .5
 function setup() {
   canvas = createCanvas(windowWidth, windowHeight*.9);
   canvas.parent('sketch-holder')
@@ -176,15 +179,15 @@ function draw() {
         rotate(angle);
         let sw = 2;
         strokeWeight(sw);
-        circle(mx+randomGaussian(),my+randomGaussian(),random(1,4))
-        circle(mx+randomGaussian(),my+randomGaussian(),random(1,4))
+        circle(mx+randomGaussian(mean, sd),my+randomGaussian(mean, sd),random(1,3))
+        circle(mx+randomGaussian(mean, sd),my+randomGaussian(mean, sd),random(1,3))
 
         //line(mx, my, pmx, pmy);
         if (mirror){
           push();
           scale(-1, 1);
-          circle(mx+randomGaussian(),my+randomGaussian(),random(1,4))
-          circle(mx+randomGaussian(),my+randomGaussian(),random(1,4))
+          circle(mx+randomGaussian(mean, sd),my+randomGaussian(mean, sd),random(1,3))
+          circle(mx+randomGaussian(mean, sd),my+randomGaussian(mean, sd),random(1,3))
 
           //line(mx, my, pmx, pmy);
           pop();
@@ -192,7 +195,7 @@ function draw() {
 
         }
         else {
-          circle(mx+random(-1,1),my+random(-1,1),random(1,4))
+          circle(mx+randomGaussian(mean, sd),my+rrandomGaussian(mean, sd),random(1,3))
 
         }
       }
