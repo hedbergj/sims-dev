@@ -8,6 +8,13 @@ var tone1input;
 var tone2input;
 var running = false;
 var onoff;
+let freq1freq;
+let freq2freq;
+var theta = 0.0;
+var period = 200.0;
+var xspacing = 5;
+var baseamplitude = 150.0;
+var yvalues=[];
 
 function setup() {
   canvas=createCanvas(windowWidth,0.9*windowHeight);
@@ -18,26 +25,29 @@ function setup() {
   onoff.position(windowWidth*.9,30);
   onoff.class("sim-button");
   onoff.parent("sketch-holder")
+  yvalues = new Array(500);
 
 
 
   tone1input = createInput('440');
-  tone2input = createInput('441');
   tone1input.parent("sketch-holder")
-  tone2input.parent("sketch-holder")
   tone1input.position(50,10);
-  tone2input.position(300,10);
   tone1input.attribute("type", "numeric");
+
+  tone2input = createInput('441');
+  tone2input.position(300,10);
+  tone2input.parent("sketch-holder")
   tone2input.attribute("type", "numeric");
 
 
   tone1 = createButton("set tone1");
-  tone2 = createButton("set tone2");
-  tone1.class("sim-button");
-  tone2.class("sim-button");
   tone1.position(tone1input.x,tone1input.y+40);
-  tone2.position(tone2input.x,tone2input.y+40);
+  tone1.class("sim-button");
   tone1.parent('sketch-holder');
+
+  tone2 = createButton("set tone2");
+  tone2.class("sim-button");
+  tone2.position(tone2input.x,tone2input.y+40);
   tone2.parent('sketch-holder');
 
 
@@ -45,30 +55,40 @@ function setup() {
   tone1.mouseClicked(settone1);
   tone2.mouseClicked(settone2);
 
-  tone1freqslider = createSlider(1,700,441,1);
-  tone2freqslider = createSlider(1,700,440,1);
+
+
+  freq1freq = 440;
+  freq2freq = 441;
+
+  tone1freqslider = createSlider(1,700,freq1freq,.1);
   tone1freqslider.style('width', '200px');
-  tone2freqslider.style('width', '200px');
+  tone1freqslider.input(tone1freqsliderChange);
   tone1freqslider.position(tone1.x,tone1.y+100);
   tone1freqslider.class('sim-slider')
+
+  tone2freqslider = createSlider(1,700,freq2freq,.1);
   tone2freqslider.position(tone2.x,tone2.y+100);
   tone2freqslider.class('sim-slider')
-  tone1freqslider.input(tone1freqsliderChange);
+  tone2freqslider.style('width', '200px');
   tone2freqslider.input(tone2freqsliderChange);
 
-  tone1ampslider = createSlider(0,.5,.25,.01);
-  tone2ampslider = createSlider(0,.5,.25,.01);
-  tone1ampslider.style('width', '200px');
-  tone2ampslider.style('width', '200px');
-  tone1ampslider.position(tone1.x,tone1freqslider.y+50);
+  freq1amp = .25
+  freq2amp = .25
+
+  tone1ampslider = createSlider(0,.5,freq1amp,.01);
   tone1ampslider.class('sim-slider')
+  tone1ampslider.style('width', '200px');
+  tone1ampslider.position(tone1.x,tone1freqslider.y+50);
+
+  tone2ampslider = createSlider(0,.5,freq1amp,.01);
+  tone2ampslider.style('width', '200px');
   tone2ampslider.position(tone2.x,tone2freqslider.y+50);
   tone2ampslider.class('sim-slider')
 
 
 
 
-
+  freq1amp = .25
 
   frameRate(19);
 
@@ -91,45 +111,88 @@ function setup() {
   // create an fft to analyze the audio
   fft = new p5.FFT(.8,1024);
   noLoop();
+
+    dx = .05;
 }
 
 function draw() {
   background(250);
-
-
+  freq1amp = tone1ampslider.value();
+  freq2amp = tone2ampslider.value();
   freq1.amp(tone1ampslider.value(),.01);
   freq2.amp(tone2ampslider.value(),.01);
   // analyze the waveform
   waveform = fft.waveform();
 
   // draw the shape of the waveform
-  stroke(10);
-  noFill();
-  //strokeWeight(10);
-  beginShape();
-  for (var i = 0; i<waveform.length; i++){
-    var x = map(i, 0, waveform.length, 0, width);
-    var y = map(waveform[i], -1, 1, -height/2, height/2);
-    vertex(x, y + height/2);
-  }
-  endShape();
+  // stroke(10);
+  // noFill();
+  // //strokeWeight(10);
+  // beginShape();
+  // for (var i = 0; i<waveform.length; i++){
+  //   var x = map(i, 0, waveform.length, 0, width);
+  //   var y = map(waveform[i], -1, 1, -height/2, height/2);
+  //   vertex(x, y + height/2);
+  // }
+  // endShape();
+
+calcWave(freq1freq,freq1amp);
+renderWave(color(250,0,0),1);
+
+calcWave(freq2freq,freq2amp);
+renderWave(color(0,0,250),1);
+
+calcSum();
+renderWave(color(250,0,250),2);
 }
-function mouseClicked(){
-  //freq1.stop();
-  //freq2.stop();
-}
+
 
 function settone1(){
   var f1 = Number(tone1input.value());
   freq1.freq(f1,.1);
   tone1freqslider.value(f1)
-
+  freq1freq = f1
 }
 function settone2(){
   var f2 = Number(tone2input.value());
   freq2.freq(f2,.1);
   tone2freqslider.value(f2)
+  freq2freq = f2
 
+
+}
+
+function calcWave(frequency,amplitude) {
+
+  var x = theta;
+
+  for (var i = 0; i < yvalues.length; i++) {
+    yvalues[i] = sin(x*frequency/30)*amplitude*baseamplitude;
+    x+=dx;
+  }
+}
+
+function calcSum() {
+
+  var x = theta;
+
+  for (var i = 0; i < yvalues.length; i++) {
+    yvalues[i] = baseamplitude*(freq1amp*sin(x*freq1freq/30)+freq2amp*sin(x*freq2freq/30));
+    x+=dx;
+  }
+}
+
+function renderWave(color_,weight_) {
+
+
+  noFill();
+  stroke(color_);
+  strokeWeight(weight_)
+  beginShape();
+  for (var x = 0; x < yvalues.length; x++) {
+    curveVertex(x*xspacing, height/2+yvalues[x]);
+  }
+  endShape();
 }
 
 function turnonoff() {
@@ -167,9 +230,12 @@ freq2.start(.1);
 function tone1freqsliderChange() {
   tone1input.value(tone1freqslider.value());
   freq1.freq(tone1freqslider.value())
+  freq1freq = tone1freqslider.value()
 }
 
 function tone2freqsliderChange() {
   tone2input.value(tone2freqslider.value());
   freq2.freq(tone2freqslider.value())
+  freq2freq = tone2freqslider.value()
+
 }
